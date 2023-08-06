@@ -12,12 +12,12 @@ const PostFilter = ({filter, setFilter}) => {
             />
             <hr style={{margin: '15px 0'}}/>
             <MySelect 
-                defaultValue="Сортировка"
+                defaultValue="Sort"
                 onChange={selectedSort => setFilter({...filter, sort: selectedSort})}
                 value={filter.sort}
                 options={[
-                {value: 'title', name: 'По названию'},
-                {value: 'descr', name: 'По описанию'}
+                {value: 'title', name: 'By title'},
+                {value: 'descr', name: 'By description'}
                 ]}
             />
         </div>
