@@ -18,3 +18,18 @@
   margin: 0 auto;
 }
 
+.post-enter {
+  transform: translateX(-2000px);
+}
+.post-enter-active {
+  transform: translateX(0px);
+  transition: all 200ms;
+}
+.post-exit {
+  opacity: 1;
+}
+.post-exit-active {
+  transform: translateX(-2000px);
+  transition: all 200ms;
+}
+

@@ -17,7 +17,7 @@ const PostFilter = ({filter, setFilter}) => {
                 value={filter.sort}
                 options={[
                 {value: 'title', name: 'By title'},
-                {value: 'descr', name: 'By description'}
+                {value: 'body', name: 'By description'}
                 ]}
             />
         </div>

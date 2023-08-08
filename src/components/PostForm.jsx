@@ -5,7 +5,7 @@ import MyInput from './UI/input/Input';
 
 
 const PostForm = ({create}) => {
-    const [post, setPost] = useState({title: '', descr: ''});
+    const [post, setPost] = useState({title: '', body: ''});
 
     const addNewPost = (e) => {
         e.preventDefault();
@@ -14,7 +14,7 @@ const PostForm = ({create}) => {
             id: Date.now()
         }
         create(newPost);
-        setPost({title: '', descr: ''});
+        setPost({title: '', body: ''});
     };
     return (
         <form className='form'>
@@ -25,8 +25,8 @@ const PostForm = ({create}) => {
                 placeholder="Type title"
             />
             <MyInput 
-                value={post.descr}
-                onChange={e => setPost({...post, descr: e.target.value})}
+                value={post.body}
+                onChange={e => setPost({...post, body: e.target.value})}
                 type="text" 
                 placeholder="Type body" 
             />
