@@ -1,0 +1,11 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: bisque;
+    gap: 30px;
+    width: 500px;
+    height: 60px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
