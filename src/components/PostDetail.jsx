@@ -44,7 +44,7 @@ const PostDetail = () => {
                     <h2 style={{marginTop: '30px'}}>Comments:</h2>
                     <div>
                         {comment.map(comm => 
-                            <div style={{marginTop: '30px'}}>
+                            <div key={comm.id} style={{marginTop: '30px'}}>
                                 <h3>{comm.email}</h3>
                                 <div>{comm.body}</div>
                             </div>

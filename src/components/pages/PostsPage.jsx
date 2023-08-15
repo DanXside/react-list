@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PostList from '../PostList';
 import PostForm from '../PostForm';
 import PostFilter from '../PostFilter';
@@ -9,6 +9,7 @@ import { useFetching } from '../hooks/useFetching';
 import PostService from '../API/PostService';
 import { getPageCount, getPagesArr } from '../utils/page';
 import { Pagination } from '../UI/pagination/pagination';
+import { useObserver } from '../hooks/useObserver';
 
 function PostsPage() {
   const [posts, setPosts] = useState([]);
@@ -18,13 +19,19 @@ function PostsPage() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
 
+  const lastElem = useRef();
+
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query);
 
   const [fetchPosts, isPostsLoading, postsError] = useFetching( async () => {
     const response = await PostService.getAll(limit, page);
-    setPosts(response.data);
+    setPosts([...posts, ...response.data]);
     const totalCount = response.headers['x-total-count'];
     setTotalPages(getPageCount(totalCount, limit));
+  });
+
+  useObserver(lastElem, isPostsLoading, page < totalPages, () => {
+    setPage(page + 1);
   });
 
   useEffect(() => {
@@ -57,10 +64,10 @@ function PostsPage() {
       {
         postsError && <h1>Finding error: ${postsError}</h1>
       }
+      <PostList remove={removePost} posts={sortedAndSearchedPosts} title='Posts no. 1' />
+      <div ref={lastElem} style={{height: '20px', background: 'red'}} />
       {
-        isPostsLoading 
-        ? <h1>Loading...</h1>
-        : <PostList remove={removePost} posts={sortedAndSearchedPosts} title='Posts no. 1' />
+        isPostsLoading && <h1>Loading...</h1>
       }
       <Pagination totalPages={totalPages} changePage={changePage}/>
     </div>

@@ -5,8 +5,11 @@ import { privateRouter, publicRouter } from "./router/router";
 import { AuthContext } from "./context/context";
 
 const AppRouter = () => {
-    const {isAuth} = useContext(AuthContext);
-    console.log(isAuth);
+    const {isAuth, isLoading} = useContext(AuthContext);
+
+    if (isLoading) {
+        return <h1>Loading...</h1>;
+    };
 
     return (
         isAuth

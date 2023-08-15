@@ -9,11 +9,16 @@ import { AuthContext } from "../../context/context";
 export const Navbar = () => {
     const {isAuth, setAuth} = useContext(AuthContext);
 
+    const logout = () => {
+        setAuth(false);
+        localStorage.removeItem('auth');
+    };
+
     return (
         <div className="navbar">
             <Link to="/about">About</Link>
             <Link to="/posts">Posts</Link>
-            <MyButton onClick={() => setAuth(false)}>Log Out</MyButton>
+            <MyButton onClick={logout}>Log Out</MyButton>
         </div>   
     )
 };

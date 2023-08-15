@@ -8,6 +8,7 @@ const Login = () => {
 
     function login (e) {
         e.preventDefault();
+        localStorage.setItem('auth', 'true');
         setAuth(true);
     };
 
